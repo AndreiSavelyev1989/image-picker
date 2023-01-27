@@ -27,10 +27,10 @@ export const ImagePicker = ({
       newerPickedImage = pickedImage.delete(image.value);
     } else {
       if (typeof maxPicks === "undefined") {
-        newerPickedImage = pickedImage.set(image.value, image.src);
+        newerPickedImage = pickedImage.set(image.value, image);
       } else {
         if (pickedImage.size < maxPicks) {
-          newerPickedImage = pickedImage.set(image.value, image.src);
+          newerPickedImage = pickedImage.set(image.value, image);
         } else {
           onMaxPicks(image);
         }
@@ -42,7 +42,7 @@ export const ImagePicker = ({
 
       const pickedImageToArray = [];
       newerPickedImage.map((image, i) =>
-        pickedImageToArray.push({ src: image, value: i })
+        pickedImageToArray.push({ ...image, value: i })
       );
 
       onPick(multiple ? pickedImageToArray : pickedImageToArray[0]);
